@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한민국 노인 돌봄 문제 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .kpi-card {
+            background-color: #073B4C;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .kpi-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #FFD166;
+            margin-bottom: 0.5rem;
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+        }
+        .kpi-unit {
+            font-size: 1rem;
+            margin-left: 0.25rem;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #073B4C;
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            text-align: center;
+            color: #118AB2;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .roadmap-step {
+            border-left: 4px solid #06D6A0;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .roadmap-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #06D6A0;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#073B4C]">돌봄의 무게, 사회의 과제</div>
+            <div class="hidden md:flex space-x-4">
+                <a href="#section1" class="text-gray-600 hover:text-[#118AB2]">돌봄의 비용</a>
+                <a href="#section2" class="text-gray-600 hover:text-[#118AB2]">현실의 벽</a>
+                <a href="#section3" class="text-gray-600 hover:text-[#118AB2]">해외의 해법</a>
+                <a href="#section4" class="text-gray-600 hover:text-[#118AB2]">미래 로드맵</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hero Section -->
+        <section class="text-center py-12 md:py-20">
+            <h1 class="text-4xl md:text-6xl font-black text-[#073B4C] mb-4">"부모님, 사랑하지만 너무 힘들어요"</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                대한민국은 지금 '돌봄의 위기'에 직면해 있습니다. 더 이상 개인의 효심에만 기댈 수 없는 이 문제,
+                데이터를 통해 현실을 직시하고 지속 가능한 해법을 모색합니다.
+            </p>
+        </section>
+
+        <!-- Section 1: The Unseen Costs -->
+        <section id="section1" class="py-16">
+            <h2 class="section-title">보이지 않는 비용: 돌봄에 무너지는 삶</h2>
+            <p class="section-subtitle">부모님 돌봄은 단순히 시간과 노력의 문제를 넘어, 자녀의 삶을 경제적, 정서적, 신체적으로 위협하는 '삼중고'를 동반합니다.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="kpi-card">
+                    <div class="kpi-title">경제적 파산</div>
+                    <div class="kpi-value">300<span class="kpi-unit">만원+</span></div>
+                    <p class="text-sm mt-2">월 평균 간병 비용</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">정서적 소진</div>
+                    <div class="kpi-value">70<span class="kpi-unit">%</span></div>
+                    <p class="text-sm mt-2">돌봄으로 인한 우울감 경험</p>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">경력 단절</div>
+                    <div class="kpi-value">42<span class="kpi-unit">%</span></div>
+                    <p class="text-sm mt-2">가족 돌봄 위해 퇴사/휴직 경험</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-xl mb-4 text-center text-[#073B4C]">가계 부담: 소득의 절반이 간병비로</h3>
+                    <p class="text-center text-gray-600 mb-4">평균 소득 가구 기준, 월 소득의 약 50%가 부모님 간병 및 의료비로 지출되어 '간병 파산'의 위험에 노출됩니다.</p>
+                    <div class="chart-container">
+                        <canvas id="economicBurdenChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-xl mb-4 text-center text-[#073B4C]">정서적 소진 수준 비교</h3>
+                    <p class="text-center text-gray-600 mb-4">가족 돌봄자는 일반인에 비해 만성 스트레스와 우울감을 경험할 확률이 2배 이상 높게 나타납니다.</p>
+                     <div class="chart-container h-full">
+                        <canvas id="emotionalBurnoutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Current Reality -->
+        <section id="section2" class="py-16 bg-gray-100 -mx-4 md:-mx-8 px-4 md:px-8">
+            <h2 class="section-title">우리의 현주소: 좋은 제도, 그러나 부족한 현실</h2>
+            <p class="section-subtitle">정부의 노력에도 불구하고 현행 돌봄 제도는 "집에서 편안한 노후를 보내고 싶다"는 대다수의 바람과 현실 사이에 큰 간극을 보이고 있습니다.</p>
+            <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
+                <h3 class="font-bold text-xl mb-4 text-center text-[#073B4C]">희망과 현실의 간극: 돌봄 장소 선호도 vs 실제</h3>
+                 <p class="text-center text-gray-600 mb-4">국민의 90% 이상은 자택에서 돌봄받기를 원하지만, 실제 장기요양보험 서비스의 상당 부분은 시설 중심으로 제공되고 있습니다.</p>
+                <div class="chart-container" style="max-width: 800px;">
+                    <canvas id="realityGapChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Hope from Abroad -->
+        <section id="section3" class="py-16">
+            <h2 class="section-title">북유럽에서 찾은 희망: "집에서, 존엄하게, 끝까지"</h2>
+            <p class="section-subtitle">우리보다 먼저 초고령사회를 맞이한 덴마크와 스웨덴은 '살던 곳에서 늙어갈 권리'를 보장하며 우리에게 새로운 방향을 제시합니다.</p>
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-[#073B4C] text-white">
+                            <th class="p-4 font-bold">구분</th>
+                            <th class="p-4 font-bold">대한민국 모델 (현재)</th>
+                            <th class="p-4 font-bold text-[#FFD166]">북유럽 모델 (지향점)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold text-[#073B4C]">핵심 목표</td>
+                            <td class="p-4 text-gray-700">문제 발생 후 사후 대처</td>
+                            <td class="p-4 text-gray-700 font-bold">예방 및 독립 생활 유지</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold text-[#073B4C]">서비스 중심</td>
+                            <td class="p-4 text-gray-700"><span class="font-bold text-[#FF6B6B]">시설</span> (요양병원, 요양원)</td>
+                            <td class="p-4 text-gray-700 font-bold"><span class="font-bold text-[#06D6A0]">재가</span> (내 집, 우리 동네)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold text-[#073B4C]">핵심 제공자</td>
+                            <td class="p-4 text-gray-700">가족, 민간 기관</td>
+                            <td class="p-4 text-gray-700 font-bold">지방정부 (코뮨), 전문가</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                             <td class="p-4 font-bold text-[#073B4C]">기술 활용</td>
+                            <td class="p-4 text-gray-700">제한적 (응급벨 등)</td>
+                            <td class="p-4 text-gray-700 font-bold">적극적 (AI, 로봇, 스마트홈)</td>
+                        </tr>
+                         <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold text-[#073B4C]">결과</td>
+                            <td class="p-4 text-gray-700">사회적 입원, 가족 부담 가중</td>
+                            <td class="p-4 text-gray-700 font-bold">삶의 질 유지, 사회적 비용 절감</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Section 4: Roadmap for the Future -->
+        <section id="section4" class="py-16 bg-gray-100 -mx-4 md:-mx-8 px-4 md:px-8">
+            <h2 class="section-title">모두가 행복한 돌봄 사회로 가는 길</h2>
+            <p class="section-subtitle">가족의 짐을 덜고 사회가 함께 책임지는 지속가능한 돌봄 시스템, 3단계 로드맵을 제안합니다.</p>
+            <div class="max-w-3xl mx-auto">
+                <div class="roadmap-step" data-step="1">
+                    <h3 class="text-2xl font-bold text-[#073B4C] mb-2">1단계: 지금 바로, 재가 서비스 혁신</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong class="text-[#118AB2]">한국형 방문요양:</strong> 식사, 외출, 병원 동행 등 맞춤형 서비스 제공</li>
+                        <li><strong class="text-[#118AB2]">긴급돌봄센터:</strong> 자녀의 출장, 경조사 시 24시간 안심 돌봄 확충</li>
+                        <li><strong class="text-[#118AB2]">가족돌봄자 지원:</strong> 유급 돌봄 휴가/휴직 법제화 및 돌봄 수당 현실화</li>
+                    </ul>
+                </div>
+                 <div class="roadmap-step" data-step="2">
+                    <h3 class="text-2xl font-bold text-[#073B4C] mb-2">2단계: 우리 동네, 통합 돌봄 허브 구축</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong class="text-[#118AB2]">어르신 통합지원센터:</strong> 주민센터에서 주거-의료-돌봄 원스톱 신청</li>
+                        <li><strong class="text-[#118AB2]">찾아가는 의료:</strong> 의사, 간호사가 집으로 방문하는 서비스 활성화</li>
+                        <li><strong class="text-[#118AB2]">지방정부 권한 강화:</strong> 지역 특성에 맞는 자율적 돌봄 모델 운영</li>
+                    </ul>
+                </div>
+                 <div class="roadmap-step" data-step="3" style="border-left-color: #FFD166;">
+                    <h3 class="text-2xl font-bold text-[#073B4C] mb-2">3단계: 미래를 향한, 스마트 '케어테크' 도입</h3>
+                     <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong class="text-[#118AB2]">AI 돌봄 로봇:</strong> 식사 보조, 이동 지원 등 힘든 일은 로봇에게</li>
+                        <li><strong class="text-[#118AB2]">스마트홈 보급:</strong> 낙상 감지, 활동량 체크로 24시간 안전 확인</li>
+                        <li><strong class="text-[#118AB2]">통합 데이터 플랫폼:</strong> 개인별 맞춤형 예방 서비스 제공</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="text-center py-12">
+            <h3 class="text-3xl font-black text-[#073B4C] mb-4">돌봄은 '비용'이 아닌 '투자'입니다.</h3>
+            <p class="text-gray-600 mb-6">우리 부모님과 나의 존엄한 미래를 위한 사회적 논의가 지금 시작되어야 합니다.</p>
+            <a href="https://www.bokjiro.go.kr" target="_blank" class="bg-[#06D6A0] text-white font-bold py-3 px-6 rounded-full hover:bg-green-500 transition-colors">
+                복지로에서 관련 정보 더보기
+            </a>
+        </footer>
+
+    </main>
+    
+    <script>
+        const colorPalette = {
+            red: '#FF6B6B',
+            yellow: '#FFD166',
+            green: '#06D6A0',
+            blue: '#118AB2',
+            darkBlue: '#073B4C',
+            gray: '#e5e7eb'
+        };
+
+        function wrapLabels(label, maxWidth) {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine += (currentLine === '' ? '' : ' ') + word;
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: "'Noto Sans KR', sans-serif",
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        family: "'Noto Sans KR', sans-serif"
+                    },
+                    titleFont: {
+                        family: "'Noto Sans KR', sans-serif"
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            family: "'Noto Sans KR', sans-serif"
+                        }
+                    }
+                },
+                y: {
+                     ticks: {
+                        font: {
+                            family: "'Noto Sans KR', sans-serif"
+                        }
+                    }
+                }
+            }
+        };
+
+        const economicBurdenCtx = document.getElementById('economicBurdenChart').getContext('2d');
+        new Chart(economicBurdenCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['간병 및 의료비', '잔여 생활비'],
+                datasets: [{
+                    label: '가계 지출',
+                    data: [50, 50],
+                    backgroundColor: [colorPalette.red, colorPalette.gray],
+                    borderColor: ['#FFFFFF'],
+                    borderWidth: 4,
+                    hoverOffset: 4
+                }]
+            },
+            options: { ...defaultChartOptions }
+        });
+
+        const emotionalBurnoutCtx = document.getElementById('emotionalBurnoutChart').getContext('2d');
+        new Chart(emotionalBurnoutCtx, {
+            type: 'bar',
+            data: {
+                labels: ['만성 스트레스', '우울감 경험'],
+                datasets: [
+                    {
+                        label: '일반인',
+                        data: [35, 25],
+                        backgroundColor: colorPalette.blue,
+                        borderColor: colorPalette.blue,
+                        borderWidth: 1
+                    },
+                    {
+                        label: '가족 돌봄자',
+                        data: [70, 55],
+                        backgroundColor: colorPalette.red,
+                        borderColor: colorPalette.red,
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                ...defaultChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%'
+                            },
+                            font: {
+                                family: "'Noto Sans KR', sans-serif"
+                            }
+                        }
+                    },
+                    x: {
+                         ticks: {
+                            font: {
+                                family: "'Noto Sans KR', sans-serif"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        const realityGapCtx = document.getElementById('realityGapChart').getContext('2d');
+        new Chart(realityGapCtx, {
+            type: 'bar',
+            data: {
+                labels: ['돌봄 장소'],
+                datasets: [
+                    {
+                        label: '자택 선호',
+                        data: [90],
+                        backgroundColor: colorPalette.green,
+                    },
+                    {
+                        label: '시설 선호',
+                        data: [10],
+                        backgroundColor: colorPalette.yellow,
+                    },
+                    {
+                        label: '실제 재가 서비스',
+                        data: [60],
+                        backgroundColor: colorPalette.blue,
+                        stack: 'Stack 1',
+                    },
+                    {
+                        label: '실제 시설 서비스',
+                        data: [40],
+                        backgroundColor: colorPalette.red,
+                        stack: 'Stack 1',
+                    }
+                ]
+            },
+            options: {
+                ...defaultChartOptions,
+                indexAxis: 'y',
+                plugins: {
+                    title: {
+                        display: false
+                    },
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: (tooltipItems) => { return ''; }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) { return value + '%' }
+                        }
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
